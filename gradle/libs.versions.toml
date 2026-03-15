@@ -3,6 +3,7 @@ androidGradlePlugin = "9.0.0"
 json = "20251224"
 kotlin = "2.3.10"
 compose = "1.10.4"
+jetbrains-compose = "1.7.3"
 lifecycle = "2.10.0"
 material3 = "1.5.0-alpha15"
 appcompat = "1.7.1"
@@ -117,6 +118,8 @@ protobuf-kotlin-lite = { module = "com.google.protobuf:protobuf-kotlin-lite", ve
 
 [plugins]
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
