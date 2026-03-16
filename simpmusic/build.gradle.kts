@@ -1,32 +1,30 @@
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    id("com.android.kotlin.multiplatform.library")
     alias(libs.plugins.kotlin.serialization)
 }
 
-android {
-    namespace = "com.metrolist.simpmusic"
-    compileSdk = 36
-
-    defaultConfig {
+kotlin {
+    androidLibrary {
+        namespace = "com.metrolist.simpmusic"
+        compileSdk = 36
         minSdk = 26
     }
+    jvm("desktop")
 
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.json)
+        }
+        androidMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
+        }
+        val desktopMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.cio)
+            }
+        }
     }
-}
-
-kotlin {
-    jvmToolchain(21)
-}
-
-dependencies {
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.cio)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.json)
-
-    coreLibraryDesugaring(libs.desugaring)
 }
